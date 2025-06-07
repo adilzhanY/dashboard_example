@@ -30,24 +30,11 @@ https://github.com/user-attachments/assets/e7f5461d-4eba-4065-b23e-8968ede08180
 - Intuitive data visualization
 - Accessible design patterns
 
-## 🏗️ Project Structure
-
-```
-dashboard/
-├── app/
-│   ├── routes/
-│   │   └── dashboard.tsx    # Main dashboard component
-│   ├── components/         # Reusable UI components
-│   └── types/             # TypeScript type definitions
-├── public/                # Static assets
-└── package.json          # Project dependencies
-```
-
 ## 🚀 Getting Started
 
 1. Clone the repository
 ```bash
-git clone [repository-url]
+git clone https://github.com/adilzhanY/dashboard_example.git
 ```
 
 2. Install dependencies
@@ -68,11 +55,3 @@ npm run dev
 - **Responsive Design**: Mobile-first approach and cross-device compatibility
 - **TypeScript**: Strong typing and type safety
 - **Performance Optimization**: Efficient rendering and state management
-
-## 📝 License
-
-MIT License - feel free to use this project as a reference or starting point for your own dashboard applications.
-
----
-
-Built with ❤️ using React, TailwindCSS, and shadcn/ui
