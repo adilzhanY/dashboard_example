@@ -2,7 +2,8 @@
 
 A sleek and responsive dashboard built with React, showcasing modern UI/UX design principles and data visualization capabilities.
 
-![Dashboard Preview](https://github.com/user-attachments/assets/fbf5ea94-66be-41f7-af13-5ce591a40e5d)
+## Demo
+https://github.com/user-attachments/assets/e7f5461d-4eba-4065-b23e-8968ede08180
 
 ## 🚀 Features
 
