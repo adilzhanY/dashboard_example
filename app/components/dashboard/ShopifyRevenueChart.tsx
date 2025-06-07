@@ -12,16 +12,41 @@ import {
 import { clientLoader } from "~/routes/dashboard";
 import type { ClientData } from "../../types/data";
 
+const CustomToolTip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          background: "rgba(255, 255, 255, 0.9)",
+          borderRadius: "14px",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+          border: "none",
+          padding: "7px",
+        }}
+      >
+        <div
+          style={{ fontWeight: "bold", fontSize: "12px", marginBottom: "4px" }}
+        >
+          {label}
+        </div>
+        <div className="text-xl font-bold text-gray-500">
+          ${payload[0].value.toLocaleString()}
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
+
 const ShopifyRevenueChart: React.FC = () => {
   const [chartData, setChartData] = useState<ClientData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const gradientColors = {
-    lastWeek: ["#FF5252", "#FF1744"], // Red gradients for last week
-    thisWeek: ["#69F0AE", "#00C853"], // Green gradients for this week
+    lastWeek: ["#81D4FA", "#4FC3F7"],
+    thisWeek: ["#80CBC4", "#26A69A"],
   };
-
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
@@ -50,12 +75,20 @@ const ShopifyRevenueChart: React.FC = () => {
     { name: "This Week", value: chartData.shopifyRevenue.thisWeek },
   ];
 
+  const totalRevenue =
+    (revenueData[0].value || 0) + (revenueData[1].value || 0);
+
   return (
-    <div className="bg-white p-6 rounded-3xl shadow-[0_0_15px_rgba(0,0,0,0.1)]">
-      <h2 className="text-xl font-semibold mb-4">Shopify Revenue</h2>
+    <div className="bg-white p-6 py-6">
+      <div>
+        <h3 className="font-medium">Total Revenue</h3>
+        <h3 className="text-2xl font-bold mr-1">
+          ${totalRevenue.toLocaleString()}
+        </h3>
+      </div>
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={revenueData}>
+          <BarChart data={revenueData} margin={{ left: 50, right: 50 }}>
             <defs>
               <linearGradient id="revenueLastWeek" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -82,35 +115,20 @@ const ShopifyRevenueChart: React.FC = () => {
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" opacity={0} />
-            <XAxis dataKey="name" hide={true} />
-            <YAxis hide={true} />
-            <Tooltip
-              formatter={(value, name, props) => {
-                const weekName = props.payload.name;
-
-                const textColor =
-                  weekName === "Last Week" ? "#ff5252" : "#4caf50";
-
-                return [
-                  <span style={{ color: textColor }}>
-                    ${value.toLocaleString()}
-                  </span>,
-                  "Revenue",
-                ];
-              }}
-              contentStyle={{
-                borderRadius: "8px",
-                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                border: "none",
-              }}
-              animationDuration={300}
+            <CartesianGrid vertical={false} opacity={0.2} />
+            <XAxis
+              dataKey={"name"}
+              tick={{ fontSize: 12, fill: "#666" }}
+              axisLine={false}
+              tickLine={false}
             />
+            <YAxis hide={true} />
+            <Tooltip content={<CustomToolTip />} cursor={false} />
             <Bar
               dataKey="value"
               name="Revenue"
               fill="url(#revenueThisWeek)"
-              radius={[10, 10, 0, 0]}
+              radius={[10, 10, 10, 10]}
               animationDuration={1500}
               animationEasing="ease-in-out"
             >

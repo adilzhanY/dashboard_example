@@ -1,4 +1,5 @@
 import React, { useEffect, useState, PureComponent } from "react";
+import { TrendingDown, TrendingUp } from "lucide-react";
 import {
   AreaChart,
   Area,
@@ -12,6 +13,48 @@ import {
 import { clientLoader } from "~/routes/dashboard";
 import type { ClientData } from "../../types/data";
 import { GRADIENT_COLORS } from "./constants/colors";
+import {
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "../ui/chart";
+
+const CustomTooltip = ({ active, payload, label }: any) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          background: "rgba(255, 255, 255, 0.9)",
+          borderRadius: "14px",
+          boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+          border: "none",
+          padding: "7px",
+        }}
+      >
+        <div
+          style={{ fontWeight: "bold", fontSize: "12px", marginBottom: "4px" }}
+        >
+          {label}
+        </div>
+        {payload.map((entry: any, index: number) => {
+          return (
+            <div key={index} className="flex text-sm text-grey-500">
+              {entry.name === "Last Week" ? (
+                <TrendingDown className="mr-1 h-3 w-3" />
+              ) : (
+                <TrendingUp className="mr-1 h-3 w-3" />
+              )}
+              <div className="mr-2 text-xs text-gray-600">{entry.name}</div>
+              <div className="text-xs font-bold">{entry.value}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+  return null;
+};
 
 const OurContactsChart: React.FC = () => {
   const [chartData, setChartData] = useState<ClientData | null>(null);
@@ -26,7 +69,7 @@ const OurContactsChart: React.FC = () => {
         if (data?.contacts?.thisWeek && data?.contacts?.lastWeek) {
           setChartData(data as ClientData);
         } else {
-          throw new Error("Invalid data structure for contacts");
+          throw new Error("Invalid data structure");
         }
       } catch (error) {
         setError(error instanceof Error ? error.message : "Unknown error");
@@ -59,11 +102,10 @@ const OurContactsChart: React.FC = () => {
   }));
 
   return (
-    <div className="bg-white p-6 rounded-3xl shadow-[0_0_15px_rgba(0,0,0,0.1)]">
-      <h3 className="text-xl font-semibold mb-4">Our Contacts</h3>
+    <div className="bg-white p-6 py-6">
       <div className="h-48">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={formattedData}>
+          <AreaChart data={formattedData} margin={{ left: 20, right: 20 }}>
             <defs>
               <linearGradient id="colorLastWeek" x1="0" y1="0" x2="0" y2="1">
                 <stop
@@ -90,45 +132,86 @@ const OurContactsChart: React.FC = () => {
                 />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" opacity={0} />
-            <XAxis dataKey={"name"} hide={true} />
-            <YAxis domain={["auto", "auto"]} hide={true} />
-            <Tooltip
-              formatter={(value, name) => {
-                const textColor = name === "Last Week" ? "#ff5252" : "#4caf50";
-
-                return [
-                  <span style={{ color: textColor }}>{value}</span>,
-                  name,
-                ];
-              }}
-              contentStyle={{
-                borderRadius: "8px",
-                boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                border: "none",
-              }}
+            <CartesianGrid vertical={false} opacity={0.2} />
+            <XAxis
+              dataKey={"name"}
+              tickFormatter={(tick) => tick.substring(0, 3)}
+              tick={{ fontSize: 12, fill: "#666" }}
+              axisLine={false}
+              tickLine={false}
             />
+            <YAxis domain={["auto", "auto"]} hide={true} />
+            <Tooltip content={<CustomTooltip />} cursor={false} />
             <Area
-              type="monotone"
+              type="natural"
               dataKey="thisWeek"
               name="This Week"
-              stroke="none"
+              stroke="#6A0DAD"
+              strokeWidth={1}
               fill="url(#colorThisWeek)"
               animationDuration={1500}
               animationEasing="ease-out"
               dot={false}
-              activeDot={{ r: 6 }}
+              activeDot={{
+                r: 4,
+                fill: "#6A0DAD",
+                stroke: "none",
+              }}
             />
             <Area
-              type="monotone"
+              type="natural"
               dataKey="lastWeek"
               name="Last Week"
-              stroke="none"
+              stroke="#C4A1E3"
+              strokeWidth={1}
               fill="url(#colorLastWeek)"
               animationDuration={1500}
               animationEasing="ease-out"
               dot={false}
-              activeDot={{ r: 6 }}
+              activeDot={{
+                r: 4,
+                fill: "#C4A1E3",
+                stroke: "none",
+              }}
+            />
+            <Legend
+              verticalAlign="bottom"
+              align="center"
+              iconType="circle"
+              wrapperStyle={{
+                fontSize: "14px",
+                marginTop: "-10px",
+              }}
+              content={({ payload }) => (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    gap: "10px",
+                    alignItems: "center",
+                  }}
+                >
+                  {payload &&
+                    payload.map((entry, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: "12px",
+                          color: entry.color,
+                        }}
+                      >
+                        {entry.dataKey === "lastWeek" ? (
+                          <TrendingDown className="mr-1 h-3 w-3" />
+                        ) : (
+                          <TrendingUp className="mr-1 h-3 w-3" />
+                        )}
+                        {entry.value}
+                      </div>
+                    ))}
+                </div>
+              )}
             />
           </AreaChart>
         </ResponsiveContainer>

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source './**/*.{js,ts,jsx,tsx}';
 
@@ -114,6 +114,30 @@
   --color-neutral-900: oklch(0.205 0 0);
   --color-neutral-950: oklch(0.145 0 0);
 
+  --color-gray-50: oklch(0.987 0.002 270);
+  --color-gray-100: oklch(0.973 0.004 270);
+  --color-gray-200: oklch(0.945 0.007 270);
+  --color-gray-300: oklch(0.905 0.01 270);
+  --color-gray-400: oklch(0.852 0.015 270);
+  --color-gray-500: oklch(0.795 0.02 270);
+  --color-gray-600: oklch(0.681 0.025 270);
+  --color-gray-700: oklch(0.554 0.03 270);
+  --color-gray-800: oklch(0.476 0.035 270);
+  --color-gray-900: oklch(0.421 0.04 270);
+  --color-gray-950: oklch(0.286 0.05 270);
+
+  --color-gray-50: oklch(0.987 0.002 270);
+  --color-gray-100: oklch(0.973 0.004 270);
+  --color-gray-200: oklch(0.945 0.007 270);
+  --color-gray-300: oklch(0.905 0.01 270);
+  --color-gray-400: oklch(0.852 0.015 270);
+  --color-gray-500: oklch(0.795 0.02 270);
+  --color-gray-600: oklch(0.681 0.025 270);
+  --color-gray-700: oklch(0.554 0.03 270);
+  --color-gray-800: oklch(0.476 0.035 270);
+  --color-gray-900: oklch(0.421 0.04 270);
+  --color-gray-950: oklch(0.286 0.05 270);
+
   --color-transparent: transparent;
 
   --color-primary: #171717;
@@ -123,9 +147,9 @@
   --color-height-screen: 100vh, 100dvh;
 
   --color-font-family-sans: Inter, ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --color-font-family-tight: Inter Tight, ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --breakpoint-big-chat: 1880px;
 }
@@ -139,7 +163,6 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-
   *,
   ::after,
   ::before,
@@ -162,7 +185,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 100;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -170,7 +194,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 200;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -178,7 +203,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -186,7 +212,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -194,7 +221,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -202,7 +230,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -210,7 +239,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -218,7 +248,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 800;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -226,7 +257,8 @@ a:-webkit-any-link {
   font-style: normal;
   font-weight: 900;
   font-display: swap;
-  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2) format("woff2");
+  src: url(/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7W0Q5nw.woff2)
+    format("woff2");
 }
 
 @font-face {
@@ -255,7 +287,9 @@ a:-webkit-any-link {
 
 @layer base {
   html {
-    @apply text-primary bg-neutral-50;
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
   }
 
   body {
